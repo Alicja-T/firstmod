@@ -1,5 +1,8 @@
 package com.modding.course;
 
+import com.modding.course.block.ModBlocks;
+import com.modding.course.item.ModItems;
+import com.modding.course.util.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,13 +22,19 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("firstmod")
+@Mod(FirstMod.MOD_ID)
 public class FirstMod
 {
+    public static final String MOD_ID = "firstmod";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
     public FirstMod() {
+
+        Registration.register();
+        ModItems.register();
+        ModBlocks.register();
+
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
